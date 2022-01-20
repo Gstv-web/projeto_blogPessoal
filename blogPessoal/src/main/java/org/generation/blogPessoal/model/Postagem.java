@@ -14,12 +14,12 @@ import javax.validation.constraints.Size;
 
 //	ENTIDADE - REPLICANDO A CONSTRUÇÃO DO BD
 
-@Entity // Isto é uma entidade do JPA
-@Table(name = "tb_postagens") // Essa entidade dentro do BD será uma tabela com o nome "postagem"
+@Entity // Isto é uma entidade do JPA, uma tabela
+@Table(name = "tb_postagens") // tabela de nome "postagem"
 public class Postagem {
 	
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que é o ID da tabela (chave primária)
+	@Id //Indica que é chave primária
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que é auto increment
 	private long id;
 	
 	@NotNull

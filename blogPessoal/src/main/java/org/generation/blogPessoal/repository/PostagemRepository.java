@@ -8,8 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
-@Repository // Comunicação com o banco de dados
+@Repository // Comunicação com o banco de dados, mostra resultados
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 	
 	public List<Postagem> findAllByTituloContainingIgnoreCase (String titulo);
+	
+	//@Query(value = "query mysql")
+	
+
 }
