@@ -1,6 +1,7 @@
 package org.generation.blogPessoal.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.generation.blogPessoal.model.Usuario;
 import org.generation.blogPessoal.repository.UsuarioRepository;
@@ -26,15 +27,20 @@ public class UsuarioController {
 	// Buscar todos os usuários
 	@GetMapping("/all")
 	public ResponseEntity<List<Usuario>> findAllUsuario() {
-		return ResponseEntity.status(200).body(repository.findAll());
+		List<Usuario> list = repository.findAll();
+		if (list.isEmpty()) {		
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		} else {
+			return ResponseEntity.status(HttpStatus.OK).body(list);
+		}
 	}
 	
 	// Buscar usuários por ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> findUserByID(@PathVariable long id) {
 		return repository.findById(id)
-				.map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.notFound().build());
+				.map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
+				.orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
 	}
 	
 	// Salvar novo usuário
