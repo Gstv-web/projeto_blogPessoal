@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/postagem")
 public class PostagemController {
 	
+	
 	@Autowired // injeção de dependências
 	private PostagemRepository repository;
 	
