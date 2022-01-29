@@ -13,6 +13,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //	ENTIDADE - REPLICANDO A CONSTRUÇÃO DO BD
 
 @Entity // Isto é uma entidade do JPA, uma tabela
@@ -35,53 +37,49 @@ public class Postagem {
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	@ManyToOne
-	private long fkTema;
+	@JsonIgnoreProperties("postagem")
+	private Temas fkTema;
 	
-	/*@NotNull
-	private long fkTema;
-	
-	@NotNull
-	private long fkUsuario;
-	
-	
-	public long getFkTema() {
-		return fkTema;
-	}
-	public void setFkTema(long fkTema) {
-		this.fkTema = fkTema;
-	}
-	public long getFkUsuario() {
-		return fkUsuario;
-	}
-	public void setFkUsuario(long fkUsuario) {
-		this.fkUsuario = fkUsuario;
-	}
-	*/
+
 	public long getId() {
-		return id;
+		return this.id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getTitulo() {
-		return titulo;
+		return this.titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	public String getTexto() {
-		return texto;
+		return this.texto;
 	}
+
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+
 	public Date getData() {
-		return data;
+		return this.data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
+	public Temas getFkTema() {
+		return this.fkTema;
+	}
+
+	public void setFkTema(Temas fkTema) {
+		this.fkTema = fkTema;
+	}
 	
 	
 }
