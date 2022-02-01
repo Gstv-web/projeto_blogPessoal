@@ -19,9 +19,6 @@ public class Usuario {
 	
 	@NotBlank
 	private String nome;
-	
-	@NotBlank
-	private String usuario;
 
 	@NotBlank
 	@Email
@@ -32,6 +29,18 @@ public class Usuario {
 	private String senha;
 
 	private String foto;
+
+
+
+	public Usuario(long id, String nome, String email, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.foto = foto;
+	}
+
+	public Usuario(){}
 
 
 	public long getId() {
@@ -48,14 +57,6 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getUsuario() {
-		return this.usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getEmail() {
