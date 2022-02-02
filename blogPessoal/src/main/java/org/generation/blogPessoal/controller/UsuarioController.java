@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -41,10 +42,15 @@ public class UsuarioController {
 	// Cadastrar
 	@PostMapping("/cadastro")
 	public ResponseEntity<Usuario> Post(@RequestBody Usuario usuario) {
-		return ResponseEntity.status(HttpStatus.CREATED)
-		.body(usuarioService.cadastrarUsuario(usuario));
+		return usuarioService.cadastrarUsuario(usuario).map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(resp))
+		.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 
+	// Editar dados do usuário
+	@PutMapping("/edit")
+	public ResponseEntity<Usuario> editUser(@RequestBody Usuario newUser) {
+		return ResponseEntity.status(HttpStatus.OK).body(repository.save(newUser));
+	}
 
 	// Buscar todos os usuários
 	@GetMapping("/all")
@@ -57,6 +63,7 @@ public class UsuarioController {
 		}
 	}
 	
+
 	// Buscar usuários por ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> findUserByID(@PathVariable long id) {
@@ -71,11 +78,6 @@ public class UsuarioController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(newUser));
 	}
 	
-	// Editar dados do usuário
-	@PutMapping("/edit")
-	public ResponseEntity<Usuario> editUser(@RequestBody Usuario newUser) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(newUser));
-	}
 	
 	// Apagar usuário
 	@DeleteMapping("/delete/{id}")
