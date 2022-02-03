@@ -9,6 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario {
@@ -20,7 +22,8 @@ public class Usuario {
 	@NotBlank
 	private String nome;
 
-	@NotBlank
+	@Schema(example = "email@email.com")
+	@NotBlank(message = "O atributo Email é obrigatório")
 	@Email
 	private String email;
 	
