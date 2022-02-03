@@ -41,7 +41,7 @@ public class Postagem {
 	private Temas fkTema;
 
 	@ManyToOne
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties("postagem")
 	private Usuario fkUsuario;
 	
 

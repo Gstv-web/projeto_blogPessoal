@@ -34,12 +34,12 @@ public class Usuario {
 	private String email;
 	
 	@NotBlank
-	@Size(min = 5, max = 50)
+	@Size(min = 5)
 	private String senha;
 
 	private String foto;
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "fkUsuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties
 	private List<Postagem> postagem;
 
