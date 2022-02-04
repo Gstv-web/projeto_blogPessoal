@@ -72,12 +72,6 @@ public class UsuarioController {
 				.orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
 	}
 	
-	// Salvar novo usuário
-	@PostMapping("/save")
-	public ResponseEntity<Usuario> saveUser(@RequestBody Usuario newUser) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(newUser));
-	}
-	
 	
 	// Apagar usuário
 	@DeleteMapping("/delete/{id}")
