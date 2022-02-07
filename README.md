@@ -14,4 +14,4 @@ Este repositório tem como finalidade a implementação de uma API REST utilizan
 O banco de dados foi modelado conforme proposto no exercício de MySQL do bootcamp, que consiste em três tabelas seguindo um modelo simplificado de rede social.
 As tabelas estão dispostas conforme a imagem abaixo: 
 
-![](/docs/Screenshots/der_blogPessoal.PNG)
+![](/docs/ScreenShots/der_blogPessoal.PNG)
