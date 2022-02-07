@@ -23,7 +23,7 @@ public class Postagem {
 	
 	@Id //Indica que é chave primária
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que é auto increment
-	private long id;
+	private long idPostagem;
 	
 	@NotNull
 	@Size(min = 5, max = 100)
@@ -34,7 +34,7 @@ public class Postagem {
 	private String texto;
 	
 	@Temporal(TemporalType.TIMESTAMP) // Vai mostrar a data
-	private Date data = new java.sql.Date(System.currentTimeMillis());
+	private Date data;
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
@@ -45,12 +45,12 @@ public class Postagem {
 	private Usuario fkUsuario;
 	
 
-	public long getId() {
-		return this.id;
+	public long getIdPostagem() {
+		return this.idPostagem;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdPostagem(long idPostagem) {
+		this.idPostagem = idPostagem;
 	}
 
 	public String getTitulo() {

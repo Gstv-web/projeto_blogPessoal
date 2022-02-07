@@ -2,11 +2,11 @@ package org.generation.blogPessoal.controller;
 
 import java.util.List;
 
-
+import org.generation.blogPessoal.DTO.PostagemDTO;
 import org.generation.blogPessoal.model.Postagem;
 import org.generation.blogPessoal.repository.PostagemRepository;
+import org.generation.blogPessoal.service.PostagemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +24,13 @@ public class PostagemController {
 	
 	@Autowired // injeção de dependências
 	private PostagemRepository repository;
+
+	@Autowired
+	private PostagemService postagemService;
 	
 	@GetMapping("/all") // get de todas as postagens
-	public ResponseEntity<List<Postagem>> findAllPostagens() {
-		return ResponseEntity.status(200).body(repository.findAll()); // status(código status) body(o que vai aparecer no corpo)
+	public ResponseEntity<List<PostagemDTO>> findAllPostagens() {
+		return postagemService.getAllPosts();
 	}
 	
 	@GetMapping("/{id}")// Path variable aqui)                   // PathVariable informa que o parâmetro vai representar o caminho da url
@@ -39,18 +42,18 @@ public class PostagemController {
 	}
 	
 	@GetMapping("/titulo/{titulo}")
-	public ResponseEntity<List<Postagem>> findByTitle(@PathVariable String titulo) {
-		return ResponseEntity.ok(repository.findAllByTituloContainingIgnoreCase(titulo));
+	public ResponseEntity<List<PostagemDTO>> findByTitle(@PathVariable String titulo) {
+		return postagemService.getByTitle(titulo);
 	}
 	
 	@PostMapping("/save") //request body vai pegar os dados inseridos na body e aí cria-se o objeto e um parâmetro
-	public ResponseEntity<Postagem> savePost(@RequestBody Postagem newPost) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(newPost));
+	public ResponseEntity<PostagemDTO> savePost(@RequestBody PostagemDTO newPost) {
+		return postagemService.newPost(newPost);
 	}
 	
 	@PutMapping("/edit") //request body vai pegar os dados inseridos na body e aí cria-se o objeto e um parâmetro
-	public ResponseEntity<Postagem> editPutPost(@RequestBody Postagem newPost) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(newPost));
+	public ResponseEntity<PostagemDTO> editPutPost(@RequestBody PostagemDTO editPost) {
+		return postagemService.editPost(editPost);
 	}
 	
 	@DeleteMapping("/delete/{id}")

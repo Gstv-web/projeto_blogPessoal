@@ -20,7 +20,7 @@ public class Temas {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long idTema;
 	
 	@NotNull
 	@Size(min = 2, max = 50)
@@ -31,12 +31,12 @@ public class Temas {
 	private List<Postagem> postagem;
 
 	
-	public long getId() {
-		return id;
+	public long getIdTema() {
+		return idTema;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdTema(long idTema) {
+		this.idTema = idTema;
 	}
 
 	public String getTags() {

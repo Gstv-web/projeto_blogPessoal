@@ -23,7 +23,7 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long idUsuario;
 	
 	@NotBlank
 	private String nome;
@@ -42,27 +42,15 @@ public class Usuario {
 	@OneToMany(mappedBy = "fkUsuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties
 	private List<Postagem> postagem;
+	
 
 
-
-
-	public Usuario(long id, String nome, String email, String senha, String foto) {
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
-		this.foto = foto;
+	public long getIdUsuario() {
+		return this.idUsuario;
 	}
 
-	public Usuario(){}
-
-
-	public long getId() {
-		return this.id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {

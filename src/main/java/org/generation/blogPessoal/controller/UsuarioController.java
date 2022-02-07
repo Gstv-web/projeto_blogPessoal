@@ -1,14 +1,15 @@
 package org.generation.blogPessoal.controller;
 
 import java.util.List;
-import java.util.Optional;
 
+import javax.validation.Valid;
+
+import org.generation.blogPessoal.DTO.UsuarioCredDTO;
+import org.generation.blogPessoal.DTO.UsuarioLoginDTO;
 import org.generation.blogPessoal.model.Usuario;
-import org.generation.blogPessoal.model.UserLogin;
-import org.generation.blogPessoal.repository.UsuarioRepository;
 import org.generation.blogPessoal.service.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,54 +29,43 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-
-	@Autowired
-	private UsuarioRepository repository;
 	
 	// Logar
 	@PostMapping("/logar")
-	public ResponseEntity<UserLogin> Authentication(@RequestBody Optional<UserLogin> user) {
-		return usuarioService.logar(user).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	public ResponseEntity<UsuarioCredDTO> pegarCredencial (@Valid @RequestBody UsuarioLoginDTO dto) {
+		return usuarioService.logar(dto);
 	}
 
 	// Cadastrar
 	@PostMapping("/cadastro")
-	public ResponseEntity<Usuario> Post(@RequestBody Usuario usuario) {
-		return usuarioService.cadastrarUsuario(usuario).map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(resp))
-		.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+	public ResponseEntity<Usuario> registrar(@Valid @RequestBody Usuario novoUsuario) {
+		return usuarioService.cadastrarUsuario(novoUsuario);
 	}
 
 	// Editar dados do usuário
 	@PutMapping("/edit")
-	public ResponseEntity<Usuario> editUser(@RequestBody Usuario newUser) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(newUser));
+	public ResponseEntity<Usuario> editUser(@Valid @RequestBody Usuario newUser) {
+		return usuarioService.updateUser(newUser);
 	}
 
 	// Buscar todos os usuários
 	@GetMapping("/all")
 	public ResponseEntity<List<Usuario>> findAllUsuario() {
-		List<Usuario> list = repository.findAll();
-		if (list.isEmpty()) {		
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		} else {
-			return ResponseEntity.status(HttpStatus.OK).body(list);
-		}
+		return usuarioService.getAllUsers();
 	}
 	
 
 	// Buscar usuários por ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> findUserByID(@PathVariable long id) {
-		return repository.findById(id)
-				.map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
-				.orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+		return usuarioService.findById(id);
 	}
 	
 	
 	// Apagar usuário
+	@SuppressWarnings("rawtypes") // "Esconde" alertas
 	@DeleteMapping("/delete/{id}")
-	public void deleteUser(@PathVariable long id) { // É void pois não irá retornar nada
-		repository.deleteById(id);
+	public ResponseEntity deleteUser(@PathVariable Long id) {
+		return usuarioService.deleteUser(id);
 	}
 }
