@@ -3,14 +3,17 @@ package org.generation.blogPessoal.service;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Base64;
 import org.generation.blogPessoal.DTO.UsuarioCredDTO;
+import org.generation.blogPessoal.DTO.UsuarioDTO;
 import org.generation.blogPessoal.DTO.UsuarioLoginDTO;
 import org.generation.blogPessoal.model.Usuario;
 import org.generation.blogPessoal.repository.UsuarioRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +21,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+
 @Service
 public class UsuarioService {
     
     private UsuarioCredDTO credencialDTO;
+
     @Autowired
     private UsuarioRepository repository;
 
+    @Autowired
+    private ModelMapper mapper;
 
+    // Criptografa a senha
     private static String SenhaCripto(String senhaCripto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(senhaCripto);
     }
 
+    // Cadastra um usuário CASO não conste no banco de dados
     public ResponseEntity<Usuario> cadastrarUsuario(Usuario novoUsuario) {
         Optional<Usuario> optional = repository.findByEmail(novoUsuario.getEmail());
 
@@ -42,6 +51,7 @@ public class UsuarioService {
         }
     } 
 
+    // Valida o email e senha para efetuar um login
     public ResponseEntity<UsuarioCredDTO> logar(@Valid UsuarioLoginDTO dto) {
         return repository.findByEmail(dto.getEmail()).map(resp -> {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -60,12 +70,30 @@ public class UsuarioService {
          });
     }
     
+    // gera o token basic para autenticação no header
     private static String geradorTokenBasic(String email, String senha) {
         String auth = email + ":" + senha;
         byte[] authBase64 = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
         return "Basic " + new String(authBase64);
     }
+    
+    public ResponseEntity<List<UsuarioDTO>> usuariosEncontrados(List<Usuario> user) {
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.OK)
+            .body(user.stream()
+            .map(resp -> mapper.map(resp, UsuarioDTO.class))
+            .collect(Collectors.toList()));
+        }
+    }
 
+    public ResponseEntity<List<UsuarioDTO>> getUserByName(String nome) {
+        List<Usuario> userByName = repository.findAllByNomeContainingIgnoreCase(nome);
+        return usuariosEncontrados(userByName);
+        
+        
+    }
 
     public ResponseEntity<List<Usuario>> getAllUsers() {
         List<Usuario> list = repository.findAll();
@@ -76,7 +104,6 @@ public class UsuarioService {
             return ResponseEntity.status(HttpStatus.OK).body(list);
         }
     }
-
 
     public ResponseEntity<Usuario> findById(Long id) {
         return repository.findById(id)

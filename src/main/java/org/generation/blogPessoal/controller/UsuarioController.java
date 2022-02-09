@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.generation.blogPessoal.DTO.UsuarioCredDTO;
+import org.generation.blogPessoal.DTO.UsuarioDTO;
 import org.generation.blogPessoal.DTO.UsuarioLoginDTO;
 import org.generation.blogPessoal.model.Usuario;
 import org.generation.blogPessoal.service.UsuarioService;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
+@RequestMapping("/usuarios")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
 
@@ -42,25 +43,31 @@ public class UsuarioController {
 		return usuarioService.cadastrarUsuario(novoUsuario);
 	}
 
-	// Editar dados do usuário
-	@PutMapping("/edit")
-	public ResponseEntity<Usuario> editUser(@Valid @RequestBody Usuario newUser) {
-		return usuarioService.updateUser(newUser);
-	}
-
+	
 	// Buscar todos os usuários
-	@GetMapping("/all")
+	@GetMapping("/todos")
 	public ResponseEntity<List<Usuario>> findAllUsuario() {
 		return usuarioService.getAllUsers();
 	}
 	
-
 	// Buscar usuários por ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> findUserByID(@PathVariable long id) {
 		return usuarioService.findById(id);
 	}
 	
+	
+	// Buscar usuário por Nome
+	@GetMapping("/pornome/{nome}")
+	public ResponseEntity<List<UsuarioDTO>> findUserByName(@PathVariable String nome) {
+		return usuarioService.getUserByName(nome);
+	}
+	
+	// Editar dados do usuário
+	@PutMapping("/edit")
+	public ResponseEntity<Usuario> editUser(@Valid @RequestBody Usuario newUser) {
+		return usuarioService.updateUser(newUser);
+	}
 	
 	// Apagar usuário
 	@SuppressWarnings("rawtypes") // "Esconde" alertas

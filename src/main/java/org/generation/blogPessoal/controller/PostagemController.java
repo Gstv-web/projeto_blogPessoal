@@ -8,6 +8,7 @@ import org.generation.blogPessoal.repository.PostagemRepository;
 import org.generation.blogPessoal.service.PostagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/postagem")
+@RequestMapping("/postagem")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostagemController {
 	
 	
@@ -28,7 +30,7 @@ public class PostagemController {
 	@Autowired
 	private PostagemService postagemService;
 	
-	@GetMapping("/all") // get de todas as postagens
+	@GetMapping("/todos") // get de todas as postagens
 	public ResponseEntity<List<PostagemDTO>> findAllPostagens() {
 		return postagemService.getAllPosts();
 	}
