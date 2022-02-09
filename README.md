@@ -29,7 +29,7 @@ Utilizando o Postman ou acessando a url http://localhost:8080 é possível acess
 
 - Usuário<br>
 
-```/usuarios/cadastro``` : envia uma requisção POST para cadastrar um novo usuário no banco de dados;<br>
+```/usuarios/cadastro``` : envia uma requisição POST para cadastrar um novo usuário no banco de dados;<br>
 
 ```/usuarios/logar``` : envia uma requisição POST para autenticar um usuário que consta no banco de dados;<br>
 
