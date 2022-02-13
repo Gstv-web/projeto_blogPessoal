@@ -35,7 +35,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
         .antMatchers("/usuarios/logar").permitAll() // .antMatchers libera endpoints sem precisar de token
         .antMatchers("/usuarios/cadastro").permitAll()
-        .antMatchers("/usuarios/all").permitAll()
+        .antMatchers("/usuarios/todos").permitAll()
         .anyRequest().authenticated()
         .and().httpBasic()
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
