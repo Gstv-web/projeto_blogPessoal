@@ -57,4 +57,16 @@ Utilizando o Postman ou acessando a url http://localhost:8080 é possível acess
 
 ```/postagem/delete/{id}``` : envia uma requisição DELETE com o parâmetro "id" para deletar uma postagem pelo seu Id.<br>
 
-...continua
+- Tema<br>
+
+```/temas/todos``` : envia uma requisição GET para mostrar todas as postagens de todos os usuários;<br>
+
+```/temas/{id}``` : envia uma requisição GET com o parâmetro "id" para mostrar um tema pelo seu Id;<br>
+
+```/temas/save``` : envia uma requisição POST para salvar salvar um novo tema;<br>
+
+```/temas/delete/{id}``` : envia uma requisição DELETE com o parâmetro "id" para deletar um tema pelo seu Id.<br><br>
+
+Os endpoints na camada Controller são chamados pelas funções da camada Service, onde estão as regras de negócio.<br><br>
+
+No momento é isso. A intenção deste projeto é o estudo de como criar API's REST e em breve será criado um front-end para o consumo dessas API's por lá.
