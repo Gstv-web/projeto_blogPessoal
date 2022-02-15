@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class PostagemDTO {
     
-    private String idPostagem;
+    private long idPostagem;
     private String titulo;
     private String texto;
     private Date data = new java.sql.Timestamp(System.currentTimeMillis());
@@ -19,7 +19,7 @@ public class PostagemDTO {
 
  
 
-    public PostagemDTO(String idPostagem, String titulo, String texto, Date data, TemasDTO fkTema, UsuarioDTO fkUsuario) {
+    public PostagemDTO(long idPostagem, String titulo, String texto, Date data, TemasDTO fkTema, UsuarioDTO fkUsuario) {
         this.idPostagem = idPostagem;
         this.titulo = titulo;
         this.texto = texto;
@@ -33,11 +33,11 @@ public class PostagemDTO {
 
 
 
-    public String getIdPostagem() {
+    public long getIdPostagem() {
         return this.idPostagem;
     }
 
-    public void setIdPostagem(String idPostagem) {
+    public void setIdPostagem(long idPostagem) {
         this.idPostagem = idPostagem;
     }
 

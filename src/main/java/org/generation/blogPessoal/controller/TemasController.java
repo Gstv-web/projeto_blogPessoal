@@ -28,7 +28,7 @@ public class TemasController {
 	@Autowired
 	private TemasService temasService;
 	
-	@GetMapping("/all")
+	@GetMapping("/todos")
 	public ResponseEntity<List<TemasDTO>> GetAll() {
 		return temasService.getAllTags();
 	}

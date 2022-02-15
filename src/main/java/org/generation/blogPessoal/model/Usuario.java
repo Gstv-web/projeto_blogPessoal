@@ -40,7 +40,7 @@ public class Usuario {
 	private String foto;
 
 	@OneToMany(mappedBy = "fkUsuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties
+	@JsonIgnoreProperties("fkUsuario")
 	private List<Postagem> postagem;
 	
 

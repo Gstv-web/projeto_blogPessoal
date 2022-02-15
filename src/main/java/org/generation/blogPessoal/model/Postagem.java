@@ -26,11 +26,11 @@ public class Postagem {
 	private long idPostagem;
 	
 	@NotNull
-	@Size(min = 5, max = 100)
+	@Size(max = 100)
 	private String titulo;
 	
 	@NotNull
-	@Size(min = 5, max = 1000)
+	@Size(max = 1000)
 	private String texto;
 	
 	@Temporal(TemporalType.TIMESTAMP) // Vai mostrar a data
@@ -84,6 +84,16 @@ public class Postagem {
 	public void setFkTema(Temas fkTema) {
 		this.fkTema = fkTema;
 	}
+
+	public Usuario getFkUsuario() {
+		return this.fkUsuario;
+	}
+
+	public void setFkUsuario(Usuario fkUsuario) {
+		this.fkUsuario = fkUsuario;
+	}
+
+	
 	
 	
 }
