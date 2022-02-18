@@ -113,8 +113,16 @@ public class UsuarioService {
                             });
     }
     
-
+    // Atualiza qualquer dado do usuário. Caso a senha seja alterada, será novamente criptografada
     public ResponseEntity<Usuario> updateUser(@Valid Usuario usuario) {
+        Optional<Usuario> optional = repository.findByEmail(usuario.getEmail());
+
+        if (optional.isPresent()) {
+            if (usuario.getSenha() != optional.get().getSenha()) {
+                usuario.setSenha(usuario.getSenha());
+                usuario.setSenha(SenhaCripto(usuario.getSenha()));
+            }
+        }
         return repository.findById(usuario.getIdUsuario())
                             .map(resp -> ResponseEntity.status(200).body(repository.save(usuario)))
                             .orElseGet(() -> {
