@@ -1,18 +1,20 @@
 package org.generation.blogPessoal.DTO;
 
-public class UsuarioCredDTO {
+public class UsuarioCredDTO extends UsuarioDTO {
     
     private long idUsuario;
     private String email;
     private String token;
+    private String foto;
     private String tipoUsuario;
 
 
 
-    public UsuarioCredDTO(long idUsuario, String email, String token, String tipoUsuario) {
+    public UsuarioCredDTO(long idUsuario, String email, String token, String foto, String tipoUsuario) {
         this.idUsuario = idUsuario;
         this.email = email;
         this.token = token;
+        this.foto = foto;
         this.tipoUsuario = tipoUsuario;
     }
 
@@ -51,5 +53,14 @@ public class UsuarioCredDTO {
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+
+    public String getFoto() {
+        return this.foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
 
 }

@@ -46,6 +46,9 @@ public class Usuario {
 	private List<Postagem> postagem;
 	
 
+	public Usuario() {
+	}
+
 
 	public long getIdUsuario() {
 		return this.idUsuario;
