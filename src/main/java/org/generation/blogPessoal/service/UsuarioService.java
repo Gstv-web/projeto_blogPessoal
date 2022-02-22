@@ -1,10 +1,14 @@
 package org.generation.blogPessoal.service;
 
 import java.nio.charset.Charset;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Base64;
@@ -20,12 +24,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Service
 public class UsuarioService {
     
     private UsuarioCredDTO credencialDTO;
+
 
     @Autowired
     private UsuarioRepository repository;
@@ -60,7 +66,8 @@ public class UsuarioService {
                 credencialDTO = new UsuarioCredDTO(
                             resp.getIdUsuario(),
                             geradorTokenBasic(dto.getEmail(), dto.getSenha()),
-                            resp.getEmail());
+                            resp.getEmail(),
+                            dto.getTipoUsuario());
                 return ResponseEntity.status(HttpStatus.OK).body(credencialDTO);
             } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha inválida.");
@@ -115,7 +122,7 @@ public class UsuarioService {
     
     // Atualiza qualquer dado do usuário. Caso a senha seja alterada, será novamente criptografada
     public ResponseEntity<Usuario> updateUser(@Valid Usuario usuario) {
-        Optional<Usuario> optional = repository.findByEmail(usuario.getEmail());
+        Optional<Usuario> optional = repository.findById(usuario.getIdUsuario());
 
         if (optional.isPresent()) {
             if (usuario.getSenha() != optional.get().getSenha()) {
@@ -140,5 +147,7 @@ public class UsuarioService {
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id não encontrado");
         }
-    }
+    }    
+  
+
 }

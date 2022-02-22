@@ -5,13 +5,15 @@ public class UsuarioCredDTO {
     private long idUsuario;
     private String email;
     private String token;
+    private String tipoUsuario;
 
 
 
-    public UsuarioCredDTO(long idUsuario, String email, String token) {
+    public UsuarioCredDTO(long idUsuario, String email, String token, String tipoUsuario) {
         this.idUsuario = idUsuario;
         this.email = email;
         this.token = token;
+        this.tipoUsuario = tipoUsuario;
     }
 
 
@@ -40,6 +42,14 @@ public class UsuarioCredDTO {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getTipoUsuario() {
+        return this.tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
 }

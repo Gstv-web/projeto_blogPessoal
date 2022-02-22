@@ -11,6 +11,7 @@ public class UsuarioDTO {
     private String email;
     private String senha;
     private String foto;
+    private String tipoUsuario;
 
     @JsonIgnoreProperties("fkUsuario")
     private List<PostagemDTO> postagem;
@@ -18,12 +19,13 @@ public class UsuarioDTO {
 
     // FAZER CONSTRUTOR E GETTERS AND SETTERS
 
-    public UsuarioDTO(long idUsuario, String nome, String email, String senha, String foto, List<PostagemDTO> postagem) {
+    public UsuarioDTO(long idUsuario, String nome, String email, String senha, String foto, String tipoUsuario, List<PostagemDTO> postagem) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.foto = foto;
+        this.tipoUsuario = tipoUsuario;
         this.postagem = postagem;
     }
 
@@ -80,5 +82,13 @@ public class UsuarioDTO {
         this.postagem = postagem;
     }
 
+
+    public String getTipoUsuario() {
+        return this.tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 
 }

@@ -4,6 +4,7 @@ public class UsuarioLoginDTO { // CLASSE USADA SOMENTE COMO RESPOSTA PARA O CLIE
 
     private String email;
     private String senha;
+    private String tipoUsuario;
     
 
     public String getEmail() {
@@ -21,4 +22,13 @@ public class UsuarioLoginDTO { // CLASSE USADA SOMENTE COMO RESPOSTA PARA O CLIE
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getTipoUsuario() {
+        return this.tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
 }
