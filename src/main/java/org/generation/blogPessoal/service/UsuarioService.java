@@ -64,6 +64,7 @@ public class UsuarioService {
             if (encoder.matches(dto.getSenha(), resp.getSenha())) {
                 credencialDTO = new UsuarioCredDTO(
                             resp.getIdUsuario(),
+                            resp.getNome(),
                             geradorTokenBasic(dto.getEmail(), dto.getSenha()),
                             resp.getEmail(),
                             resp.getTipoUsuario(),
