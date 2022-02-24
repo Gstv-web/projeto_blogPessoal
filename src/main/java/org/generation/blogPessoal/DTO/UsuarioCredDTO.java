@@ -10,12 +10,12 @@ public class UsuarioCredDTO extends UsuarioDTO {
 
 
 
-    public UsuarioCredDTO(long idUsuario, String email, String token, String foto, String tipoUsuario) {
+    public UsuarioCredDTO(long idUsuario, String token, String email, String tipoUsuario, String foto) {
         this.idUsuario = idUsuario;
-        this.email = email;
         this.token = token;
-        this.foto = foto;
+        this.email = email;
         this.tipoUsuario = tipoUsuario;
+        this.foto = foto;
     }
 
 

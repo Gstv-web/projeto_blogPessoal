@@ -66,8 +66,8 @@ public class UsuarioService {
                             resp.getIdUsuario(),
                             geradorTokenBasic(dto.getEmail(), dto.getSenha()),
                             resp.getEmail(),
-                            dto.getTipoUsuario(),
-                            dto.getFoto());
+                            resp.getTipoUsuario(),
+                            resp.getFoto());
                 return ResponseEntity.status(HttpStatus.OK).body(credencialDTO);
             } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha inválida.");
