@@ -37,7 +37,7 @@ public class UsuarioController {
 	
 	// Logar
 	@PostMapping("/logar")
-	public ResponseEntity<UsuarioCredDTO> pegarCredencial (@Valid @RequestBody UsuarioLoginDTO dto) {
+	public ResponseEntity<UsuarioCredDTO> pegarCredencial (@Valid @RequestBody Usuario dto) {
 		return usuarioService.logar(dto);
 	}
 
