@@ -57,7 +57,7 @@ public class UsuarioService {
     } 
 
     // Valida o email e senha para efetuar um login
-    public ResponseEntity<UsuarioCredDTO> logar(@Valid UsuarioLoginDTO dto) {
+    public ResponseEntity<UsuarioCredDTO> logar(@Valid Usuario dto) {
         return repository.findByEmail(dto.getEmail()).map(resp -> {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
