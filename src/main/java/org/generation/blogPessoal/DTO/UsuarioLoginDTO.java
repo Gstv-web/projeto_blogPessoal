@@ -6,6 +6,22 @@ public class UsuarioLoginDTO { // CLASSE USADA SOMENTE COMO RESPOSTA PARA O CLIE
     private String senha;
     private String tipoUsuario;
     private String foto;
+    private String token;
+
+
+
+    public UsuarioLoginDTO(String email, String senha, String tipoUsuario, String foto, String token) {
+        this.email = email;
+        this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
+        this.foto = foto;
+        this.token = token;
+    }
+
+
+    public UsuarioLoginDTO() {
+    }
+
 
     public String getEmail() {
         return this.email;
@@ -37,6 +53,14 @@ public class UsuarioLoginDTO { // CLASSE USADA SOMENTE COMO RESPOSTA PARA O CLIE
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
 }

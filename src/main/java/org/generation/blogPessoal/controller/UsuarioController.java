@@ -20,9 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+
 
 
 @RestController
@@ -37,7 +36,7 @@ public class UsuarioController {
 	
 	// Logar
 	@PostMapping("/logar")
-	public ResponseEntity<UsuarioCredDTO> pegarCredencial (@Valid @RequestBody Usuario dto) {
+	public ResponseEntity<UsuarioCredDTO> pegarCredencial (@Valid @RequestBody UsuarioLoginDTO dto) {
 		return usuarioService.logar(dto);
 	}
 
