@@ -1,8 +1,10 @@
 package org.generation.blogPessoal.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.catalina.connector.Response;
 import org.generation.blogPessoal.DTO.TemasDTO;
 import org.generation.blogPessoal.model.Temas;
 import org.generation.blogPessoal.repository.TemasRepository;
@@ -53,6 +55,13 @@ public class TemasService {
         Temas novo = repository.save(mapper.map(newtag, Temas.class));
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.map(novo, TemasDTO.class));
     }
+
+    public ResponseEntity<TemasDTO> editTag(TemasDTO editTag) {
+        Temas edited = repository.save(mapper.map(editTag, Temas.class));
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.map(edited, TemasDTO.class));
+
+    }
+
 
     public void deleteTag(Long id) {
         repository.deleteById(id);
