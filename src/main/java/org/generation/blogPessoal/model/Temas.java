@@ -31,8 +31,9 @@ public class Temas {
 	private List<Postagem> postagem;
 
 	
+
 	public long getIdTema() {
-		return idTema;
+		return this.idTema;
 	}
 
 	public void setIdTema(long idTema) {
@@ -40,12 +41,21 @@ public class Temas {
 	}
 
 	public String getTags() {
-		return tags;
+		return this.tags;
 	}
 
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
+
+	public List<Postagem> getPostagem() {
+		return this.postagem;
+	}
+
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
+	}
+	
 	
 	
 }

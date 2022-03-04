@@ -1,10 +1,8 @@
 package org.generation.blogPessoal.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.catalina.connector.Response;
 import org.generation.blogPessoal.DTO.TemasDTO;
 import org.generation.blogPessoal.model.Temas;
 import org.generation.blogPessoal.repository.TemasRepository;
